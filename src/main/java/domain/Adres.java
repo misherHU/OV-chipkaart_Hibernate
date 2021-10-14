@@ -13,27 +13,37 @@ private String straat;
 private String postcode;
 private String woonplaats;
 private String huisnummer;
-private int reiziger_id;
+//private int reiziger_id;
 
 
 
 
-@Transient
-private Reiziger reiziger;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "reiziger_id")
+    private Reiziger reiziger;
 
 
 
 
 public Adres(){}
-public Adres(int id,String woonplaats,String huisnummer,String postcode,String straat,int reiziger_id){
-    this.id=id;
-    this.woonplaats=woonplaats;
-    this.huisnummer=huisnummer;
-    this.postcode=postcode;
-    this.straat=straat;
-    this.reiziger_id=reiziger_id;
+//public Adres(int id,String woonplaats,String huisnummer,String postcode,String straat,int reiziger_id){
+//    this.id=id;
+//    this.woonplaats=woonplaats;
+//    this.huisnummer=huisnummer;
+//    this.postcode=postcode;
+//    this.straat=straat;
+//    this.reiziger_id=reiziger_id;
+//
+//}
+    public Adres(int id,String woonplaats,String huisnummer,String postcode,String straat,Reiziger reiziger){
+        this.id=id;
+        this.woonplaats=woonplaats;
+        this.huisnummer=huisnummer;
+        this.postcode=postcode;
+        this.straat=straat;
+        this.reiziger=reiziger;
 
-}
+    }
 
 
 
@@ -45,17 +55,17 @@ public Adres(int id,String woonplaats,String huisnummer,String postcode,String s
         this.reiziger = reiziger;
     }
 
-    public int getReiziger_id() {
-        return reiziger_id;
-    }
+//    public int getReiziger_id() {
+//        return reiziger_id;
+//    }
 
     public String getPostcode() {
         return postcode;
     }
 
-    public void setReiziger_id(int reiziger_id) {
-        this.reiziger_id = reiziger_id;
-    }
+//    public void setReiziger_id(int reiziger_id) {
+//        this.reiziger_id = reiziger_id;
+//    }
 
     public void setPostcode(String postcode) {
         this.postcode = postcode;
@@ -102,7 +112,7 @@ public Adres(int id,String woonplaats,String huisnummer,String postcode,String s
                 ", postcode='" + postcode + '\'' +
                 ", woonplaats='" + woonplaats + '\'' +
                 ", huisnummer='" + huisnummer + '\'' +
-                ", reiziger_id=" + reiziger_id +
+                ", reiziger_id=" + reiziger.getReiziger_id() +
                 '}';
     }
 

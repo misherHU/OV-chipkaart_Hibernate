@@ -18,11 +18,12 @@ public class OvChipKaart {
     int klasse;
     double saldo;
 
-//    @Column(name = "reiziger_id")
-//    Reiziger reiziger;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "reiziger_id")
+    Reiziger reiziger;
 
-    @Column(name = "reiziger_id")
-    int reizigerId;
+//    @Column(name = "reiziger_id")
+//    int reizigerId;
 
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
@@ -51,12 +52,12 @@ public class OvChipKaart {
 
 
 
-    public OvChipKaart(int kaartNummer,Date geldigTot,int klasse,double saldo,int reizigerId){
+    public OvChipKaart(int kaartNummer,Date geldigTot,int klasse,double saldo,Reiziger reiziger){
         this.kaartNummer=kaartNummer;
         this.geldigTot=geldigTot;
         this.klasse=klasse;
         this.saldo=saldo;
-        this.reizigerId=reizigerId;
+        this.reiziger=reiziger;
 
 
 
@@ -79,13 +80,13 @@ public class OvChipKaart {
         this.saldo = saldo;
     }
 
-    public int getReizigerId() {
-        return reizigerId;
-    }
-
-    public void setReizigerId(int reizigerId) {
-        this.reizigerId = reizigerId;
-    }
+//    public int getReizigerId() {
+//        return reizigerId;
+//    }
+//
+//    public void setReizigerId(int reizigerId) {
+//        this.reizigerId = reizigerId;
+//    }
 
     public int getKaartNummer() {
         return kaartNummer;
@@ -112,7 +113,9 @@ public class OvChipKaart {
     }
 
     public void addProduct(Product product){
+
         products.add(product);
+        product.addOVchipkaart(this);
     }
 
     @Override
@@ -122,7 +125,7 @@ public class OvChipKaart {
                 ", geldigTot=" + geldigTot +
                 ", klasse=" + klasse +
                 ", saldo=" + saldo +
-                ", reizigerId=" + reizigerId +
+                ", reizigerId=" + reiziger.getReiziger_id() +
                 ", products=" + "products" +
                 '}';
     }
